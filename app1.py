@@ -49,6 +49,10 @@ def calculate_cosine_similarity(df):
     
     return cosine_sim
 
+@app.route("/")
+def home():
+    return "Ready to Generate Recommendations"
+
 @app.route('/register', methods=['POST'])
 def register():
     user_data = request.json
