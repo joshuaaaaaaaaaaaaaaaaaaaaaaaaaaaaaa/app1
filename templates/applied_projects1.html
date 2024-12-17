@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kegiatan Relawan Saya - VolunteerHub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #F5F5F5; /* Light gray background */
+            font-family: "Helvetica Neue", Arial, sans-serif; /* Default Bootstrap font */
+        }
+
+        /* Header */
+        .header {
+            background-color: #34495E; /* Darker blue-gray */
+            color: #FFFFFF;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        /* Main Content Container */
+        .container {
+            margin-top: 2rem;
+        }
+
+        /* List Group Items */
+        .list-group-item {
+            background-color: #EAF2F8; /* Light blue */
+            color: #2C3E50; /* Dark blue */
+            border: 2px solid #D4E6F1; /* Blue border */
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .list-group-item h5 {
+            color: #34495E; /* Blue-gray for titles */
+            font-weight: bold;
+        }
+
+        .list-group-item p {
+            color: #566573; /* Muted gray-blue */
+        }
+
+        /* Label Tag */
+        .label {
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background-color: #5DADE2; /* Blue */
+            color: #FFFFFF;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        /* Heading */
+        h2 {
+            color: #34495E; /* Blue-gray */
+            text-align: center;
+            margin-bottom: 2rem;
+            font-family: "Helvetica Neue", Arial, sans-serif; /* Match Bootstrap font */
+            font-weight: bold; /* Bold untuk konsistensi */
+        }
+
+        /* Empty State */
+        .empty-message {
+            color: #7F8C8D; /* Muted gray */
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        /* Back Buttons */
+        .back-buttons {
+            margin-top: 3rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .btn-secondary {
+            background-color: #BDC3C7; /* Light gray */
+            color: #2C3E50; /* Dark blue */
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: #AAB7B8; /* Slightly darker gray */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>VolunteerHub</h1>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h2>Kegiatan Relawan Saya</h2>
+        {% if projects %}
+        <ul class="list-group">
+            {% for project in projects %}
+            <li class="list-group-item">
+                <span class="label">Diikuti</span>
+                <h5>{{ project['Nama Kegiatan'] }}</h5>
+                <p><strong>Lokasi:</strong> {{ project['Lokasi (Kota, Provinsi)'] }}</p>
+                <p><strong>Penyelenggara:</strong> {{ project['Penyelenggara'] }}</p>
+                <p><strong>Kategori:</strong> {{ project['Kategori Kegiatan'] }}</p>
+                <!-- Remove Button -->
+            <form action="{{ url_for('remove_applied_project') }}" method="POST" style="display: inline;">
+                <input type="hidden" name="project_id" value="{{ project['id'] }}">
+                <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+            </form>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="empty-message">Anda belum mengikuti kegiatan relawan apa pun.</p>
+        {% endif %}
+
+        <!-- Back Buttons -->
+        <div class="back-buttons">
+            <a href="/" class="btn btn-secondary">Kembali ke Halaman Utama</a>
+            <a href="/recommendations" class="btn btn-secondary">Kembali ke Halaman Rekomendasi</a>
+        </div>
+    </div>
+</body>
+</html>

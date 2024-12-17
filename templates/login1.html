@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - VolunteerHub</title>
+  <style>
+    /* Global styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #2C3E50; /* Warna sesuai referensi */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+    }
+
+    /* Header Styles */
+    .header {
+      background-color: #2C3E50; /* Dark Blue */
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      z-index: 10;
+      color: #FFFFFF; /* White text */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #FFFFFF; /* White logo text */
+    }
+
+    .login-container {
+      background-color: #FFFFFF; /* White Background */
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      max-width: 900px;
+      width: 100%;
+      margin-top: 6rem; /* To account for fixed header */
+    }
+
+    .login-image {
+      flex: 1;
+      text-align: center;
+    }
+
+    .login-image img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .login-form {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .login-form h1 {
+      font-size: 1.8rem;
+      color: #2C3E50; /* Dark Blue */
+      margin-bottom: 1rem;
+    }
+
+    .login-form p {
+      font-size: 1rem;
+      color: #7F8C8D; /* Muted Gray */
+      margin-bottom: 2rem;
+    }
+
+    .login-form form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .login-form input[type="text"],
+    .login-form input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #BDC3C7; /* Silver */
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .login-form input:focus {
+      outline: none;
+      border-color: #2ECC71; /* Emerald Green */
+      box-shadow: 0 0 5px rgba(46, 204, 113, 0.5);
+    }
+
+    .login-form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #2ECC71; /* Emerald Green */
+      color: #FFFFFF;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .login-form button:hover {
+      background-color: #27AE60; /* Slightly darker green */
+    }
+
+    .login-form .signup {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: #7F8C8D; /* Muted Gray */
+    }
+
+    .login-form .signup a {
+      color: #E74C3C; /* Red */
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .login-form .signup a:hover {
+      text-decoration: underline;
+    }
+
+    .back-home {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #7F8C8D;
+      text-align: center;
+    }
+
+    .back-home a {
+      color: #3498DB; /* Blue */
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .back-home a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">VolunteerHub</div>
+  </header>
+
+  <!-- Login Container -->
+  <div class="login-container">
+    <!-- Gambar Ilustrasi -->
+    <div class="login-image">
+      <img src="{{ url_for('static', filename='images/login.jpg') }}" alt="Volunteer Illustration">
+    </div>
+
+    <!-- Form Login -->
+    <div class="login-form">
+      <h1>Halo!</h1>
+      <p>Log in untuk merasakan kemudahan bersama VolunteerHub!</p>
+      <form method="POST" action="/login">
+        <input type="text" name="username" placeholder="Nomor Ponsel atau Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+      </form>
+      <p class="signup">Belum punya akun? <a href="register.html">Daftar Sekarang</a></p>
+    </div>
+  </div>
+
+  <!-- Back to Home -->
+  <div class="back-home">
+    <p><a href="/home">Kembali ke Halaman Utama</a></p>
+  </div>
+</body>
+</html>

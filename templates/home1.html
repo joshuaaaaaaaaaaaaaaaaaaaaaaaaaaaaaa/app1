@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VolunteerHub</title>
+  <style>
+    /* Global styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #F5F5F5; /* Light Gray Background */
+      overflow-x: hidden; /* Prevent horizontal scrolling */
+    }
+
+    .header {
+      background-color: #2C3E50; /* Dark Blue */
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      z-index: 10;
+      color: #FFFFFF; /* White text */
+    }
+
+    .header .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #FFFFFF; /* White logo text */
+    }
+
+    .header a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #BDC3C7; /* Silver text */
+      font-size: 1rem;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .header a:hover {
+      color: #2ECC71; /* Emerald Green on hover */
+    }
+
+    .hero {
+      height: 100vh;
+      background-image: url("{{ url_for('static', filename='images/home.jpg') }}");
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding-top: 80px; /* To account for fixed header */
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    .hero .button-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px; /* Space between buttons */
+    }
+
+    .hero .btn {
+      background-color: #2ECC71; /* Emerald Green */
+      color: #FFFFFF;
+      padding: 10px 20px;
+      border-radius: 20px;
+      border: none;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: bold;
+      width: 150px; /* Fixed width for uniformity */
+      text-align: center;
+      transition: background-color 0.3s;
+    }
+
+    .hero .btn:hover {
+      background-color: #27AE60; /* Slightly darker green */
+    }
+
+    .about-section {
+      padding: 5rem 2rem;
+      background-color: #FFFFFF;
+    }
+
+    .about-section h2 {
+      font-size: 2.5rem;
+      color: #2C3E50;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .about-section .intro {
+      font-size: 1.2rem;
+      color: #7F8C8D;
+      line-height: 1.8;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .about-content {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .about-text {
+      flex: 1;
+      padding: 1rem;
+    }
+
+    .about-text h3 {
+      font-size: 1.8rem;
+      color: #2ECC71;
+      margin-bottom: 1rem;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      color: #7F8C8D;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-text ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .about-text ul li {
+      font-size: 1rem;
+      color: #2C3E50;
+      margin-bottom: 0.5rem;
+    }
+
+    .about-image {
+      flex: 1;
+      text-align: center;
+    }
+
+    .about-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-section {
+    padding: 4rem 2rem;
+    background-color: #F9F9F9;
+    text-align: center;
+  }
+
+  .contact-section h2 {
+    font-size: 2.5rem;
+    color: #2C3E50;
+    margin-bottom: 1rem;
+  }
+
+  .contact-section .intro {
+    font-size: 1.2rem;
+    color: #7F8C8D;
+    margin-bottom: 2rem;
+  }
+
+  .contact-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .contact-info, .map-container {
+    flex: 1;
+    min-width: 300px;
+    max-width: 50%; /* Membatasi lebar setiap kolom hingga 50% */
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .contact-card {
+    background-color: #FFFFFF;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  .contact-card .icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #2ECC71; /* Emerald Green */
+  }
+
+  .contact-card h3 {
+    font-size: 1.5rem;
+    color: #2C3E50;
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-card p {
+    font-size: 1rem;
+    color: #7F8C8D;
+  }
+
+  .map-container {
+    height: 300px; /* Tinggi peta */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    .contact-container {
+      flex-direction: column;
+    }
+
+    .contact-info, .map-container {
+      max-width: 100%; /* Set kolom agar memenuhi layar pada perangkat kecil */
+    }
+
+    .map-container {
+      height: 200px; /* Tinggi peta lebih kecil untuk layar kecil */
+    }
+  }
+</style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="header">
+    <div class="logo">VolunteerHub</div>
+    <div>
+      <a href="#home">Home</a>
+      <a href="#about">Tentang Kami</a>
+      <a href="#contact">Hubungi Kami</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <h1>Welcome to VolunteerHub!</h1>
+    <p>Your platform for finding and participating in volunteer activities.</p>
+    <div class="button-container">
+      <a href="/login" class="btn">Login</a>
+      <a href="/register" class="btn">Register</a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <h2>Tentang Kami</h2>
+    <p class="intro">
+      VolunteerHub adalah platform yang dirancang untuk membantu individu menemukan
+      dan berpartisipasi dalam kegiatan sukarela. Kami percaya bahwa perubahan dimulai
+      dari langkah kecil, dan bersama-sama kita dapat menciptakan dampak besar bagi dunia.
+    </p>
+
+    <div class="about-content">
+      <div class="about-text">
+        <h3>Misi Kami</h3>
+        <p>
+          Kami bertujuan untuk menghubungkan orang-orang yang ingin berkontribusi kepada
+          komunitas mereka melalui program-program sukarela yang terorganisir.
+        </p>
+        <h3>Kenapa Pilih Kami?</h3>
+        <ul>
+          <li>✔️ Memberikan rekomendasi kegiatan yang relevan</li>
+          <li>✔️ Akses ke berbagai program sukarela</li>
+          <li>✔️ Kemudahan pendaftaran secara online</li>
+          <li>✔️ Dampak nyata pada komunitas lokal</li>
+          <li>✔️ Kesempatan untuk bertemu orang-orang dengan visi yang sama</li>
+        </ul>
+      </div>
+      <div class="about-image">
+        <img src="{{ url_for('static', filename='images/about_us.jpg') }}" alt="Tentang Kami">
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+<section id="contact" class="contact-section">
+    <h2>Hubungi Kami</h2>
+    <p class="intro">
+      Ingin berkomunikasi dengan kami? Berikut adalah informasi kontak kami:
+    </p>
+  
+    <div class="contact-container">
+      <!-- Left Column: Contact Information -->
+      <div class="contact-info">
+        <div class="contact-card">
+          <div class="icon">📞</div>
+          <h3>Telepon</h3>
+          <p>+62 21 23456789</p>
+        </div>
+  
+        <div class="contact-card">
+          <div class="icon">✉️</div>
+          <h3>Email</h3>
+          <p>contact@volunteerhub.com</p>
+        </div>
+      </div>
+  
+      <!-- Right Column: Map -->
+      <div class="map-container">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31662.098517080227!2d112.75299991890411!3d-7.267867135285585!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fa21a3515291%3A0x3edf1522ff735924!2sUniversitas%20Airlangga%20-%20Kampus%20MERR%20C!5e0!3m2!1sid!2sid!4v1734156739601!5m2!1sid!2sid"
+          width="100%"
+          height="100%"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </section>
+  

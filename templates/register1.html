@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - VolunteerHub</title>
+  <style>
+    /* Global styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #2C3E50; /* Dark Blue Background */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+    }
+
+    /* Header Styles */
+    .header {
+      background-color: #2C3E50; /* Dark Blue */
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      z-index: 10;
+      color: #FFFFFF; /* White text */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #FFFFFF; /* White logo text */
+    }
+
+    /* Register Container */
+    .register-container {
+      background-color: #FFFFFF; /* White Background */
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      max-width: 900px;
+      width: 100%;
+      margin-top: 6rem; /* To account for fixed header */
+    }
+
+    .register-image {
+      flex: 1;
+      text-align: center;
+    }
+
+    .register-image img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .register-form {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .register-form h1 {
+      font-size: 1.8rem;
+      color: #2C3E50; /* Dark Blue */
+      margin-bottom: 1rem;
+    }
+
+    .register-form p {
+      font-size: 1rem;
+      color: #7F8C8D; /* Muted Gray */
+      margin-bottom: 2rem;
+    }
+
+    .register-form form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .register-form input[type="text"],
+    .register-form input[type="email"],
+    .register-form input[type="password"],
+    .register-form select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #BDC3C7; /* Silver */
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .register-form input:focus, .register-form select:focus {
+      outline: none;
+      border-color: #2ECC71; /* Emerald Green */
+      box-shadow: 0 0 5px rgba(46, 204, 113, 0.5);
+    }
+
+    .register-form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #2ECC71; /* Emerald Green */
+      color: #FFFFFF;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .register-form button:hover {
+      background-color: #27AE60; /* Slightly darker green */
+    }
+
+    .register-form .login-redirect {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: #7F8C8D; /* Muted Gray */
+    }
+
+    .register-form .login-redirect a {
+      color: #E74C3C; /* Red */
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .register-form .login-redirect a:hover {
+      text-decoration: underline;
+    }
+
+    /* Back to Home */
+    .back-home {
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+
+    .back-home a {
+      color: #3498DB; /* Blue */
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    .back-home a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">VolunteerHub</div>
+  </header>
+
+  <!-- Register Container -->
+  <div class="register-container">
+    <!-- Gambar Ilustrasi -->
+    <div class="register-image">
+      <img src="{{ url_for('static', filename='images/register.jpg') }}" alt="Volunteer Illustration">
+    </div>
+
+    <!-- Form Register -->
+    <div class="register-form">
+      <h1>Daftar</h1>
+      <p>Gabung bersama VolunteerHub untuk menjadi bagian dari komunitas kami!</p>
+      <form action="/register" method="POST">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="text" name="location" placeholder="Lokasi (Kota, Provinsi)" required>
+        <select name="category" required>
+          <option value="" disabled selected>Pilih Kategori Kegiatan</option>
+          <option value="lingkungan">Lingkungan</option>
+          <option value="pendidikan">Pendidikan</option>
+          <option value="kesehatan">Kesehatan</option>
+          <option value="sosial">Sosial</option>
+          <option value="sosial">Teknologi</option>
+          <option value="sosial">Budaya</option>
+        </select>
+        <button type="submit">Daftar</button>
+      </form>
+      <p class="login-redirect">Sudah punya akun? <a href="login.html">Login di sini</a></p>
+    </div>
+  </div>
+
+  <!-- Back to Home -->
+  <div class="back-home">
+    <p><a href="home.html">Kembali ke Halaman Utama</a></p>
+  </div>
+
+</body>
+</html>
